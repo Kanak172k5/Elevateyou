@@ -1,0 +1,353 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-navy: #0a0f1e;
+  --color-cyan-glow: #00d4ff;
+  --color-violet-glow: #7c3aed;
+  --color-soft-white: #f8fafc;
+  --color-indigo-soft: #4f46e5;
+
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+/* =============================================
+   ANIMATED GRADIENT BACKGROUNDS
+   ============================================= */
+
+@keyframes gradient-light {
+  0%   { background-color: #e8eeff; }
+  25%  { background-color: #f0e8ff; }
+  50%  { background-color: #e8fff8; }
+  75%  { background-color: #fff8e8; }
+  100% { background-color: #e8eeff; }
+}
+
+@keyframes gradient-dark {
+  0%   { background-color: #0a0a1a; }
+  25%  { background-color: #0d0a1f; }
+  50%  { background-color: #0a1a1a; }
+  75%  { background-color: #1a0a0f; }
+  100% { background-color: #0a0a1a; }
+}
+
+@keyframes mesh-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* =============================================
+     LIGHT MODE THEME
+     ============================================= */
+  :root {
+    --bg-main: #dbeafe;
+    --text-main: #1e293b;
+    --card-bg: rgba(255, 255, 255, 0.65);
+    --card-border: rgba(99, 102, 241, 0.08);
+    --accent-glow: rgba(99, 102, 241, 0.06);
+    color-scheme: light;
+  }
+
+  /* =============================================
+     DARK MODE THEME — full coverage
+     ============================================= */
+  .dark {
+    --bg-main: #0f172a;
+    --text-main: #f1f5f9;
+    --card-bg: rgba(15, 23, 42, 0.75);
+    --card-border: rgba(99, 102, 241, 0.15);
+    --accent-glow: rgba(99, 102, 241, 0.2);
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    animation: gradient-light 8s ease-in-out infinite;
+    transition: color 0.5s ease;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    animation: gradient-dark 8s ease-in-out infinite;
+  }
+
+  /* Force dark text/bg across ALL elements */
+  .dark * {
+    border-color: rgba(148, 163, 184, 0.1);
+  }
+
+  .dark input,
+  .dark textarea,
+  .dark select {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    color: #e2e8f0 !important;
+    border-color: rgba(51, 65, 85, 0.5) !important;
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: rgba(148, 163, 184, 0.5) !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* =============================================
+   GLASS MORPHISM — Proper dark mode support
+   ============================================= */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+}
+
+.glass:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .glass:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* =============================================
+   ANIMATED MESH OVERLAY
+   ============================================= */
+.mesh-bg {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: mesh-gradient 15s ease infinite;
+  opacity: 0.03;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dark .mesh-bg {
+  background: linear-gradient(-45deg, #1e1b4b, #312e81, #0c4a6e, #134e4a);
+  opacity: 0.08;
+}
+
+/* =============================================
+   FLOATING ORBS
+   ============================================= */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.08;
+  animation: float 20s infinite ease-in-out;
+}
+
+.dark .orb {
+  opacity: 0.15;
+  filter: blur(100px);
+}
+
+/* =============================================
+   INTERACTIVE UTILITIES
+   ============================================= */
+.tilt-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tilt-3d:hover {
+  transform: translateY(-10px) rotateX(4deg) rotateY(4deg);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+}
+
+.dark .tilt-3d:hover {
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.25);
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.dark .shimmer {
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.15), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(to right, #4f46e5, #00d4ff);
+  transition: width 0.3s ease;
+}
+
+.nav-underline:hover::after {
+  width: 100%;
+}
+
+.glow-dot {
+  width: 4px;
+  height: 4px;
+  background: #4f46e5;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #4f46e5;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* No-scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =============================================
+   GLOBAL FOCUS RING — accessible violet
+   ============================================= */
+*:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* =============================================
+   SKELETON LOADING SHIMMER
+   ============================================= */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f8fafc 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* =============================================
+   DRIFT ANIMATION — floating orbs on pages
+   ============================================= */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(25px, -30px) rotate(5deg); }
+  66%  { transform: translate(-15px, 20px) rotate(-3deg); }
+}
+
+.drift-orb {
+  animation: drift 12s ease-in-out infinite;
+}
+
+/* =============================================
+   BUTTON SHIMMER EFFECT
+   ============================================= */
+@keyframes btn-shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: btn-shimmer 2s ease infinite;
+  pointer-events: none;
+}
+
+/* =============================================
+   PAGE SECTION FADE-IN
+   ============================================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+

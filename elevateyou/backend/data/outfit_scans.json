@@ -1,0 +1,33 @@
+[
+  {
+    "userId": "demo-user",
+    "event": "Interview",
+    "inputType": "text",
+    "outfitDescription": "i wear blue shirt with pink troweser white shoes",
+    "aiResponse": {
+      "score": 6,
+      "summary": "The blue shirt is a classic choice for an interview, but the combination with pink trousers may raise some eyebrows. The white shoes add a touch of crispness to the overall look, but may not be the best match for the bold pink trousers.",
+      "strengths": [
+        "The blue shirt is a timeless and professional choice",
+        "The white shoes are clean and polished",
+        "The pink trousers add a pop of personality to the outfit"
+      ],
+      "improvements": [
+        "Consider swapping the pink trousers for a more neutral color to balance out the look",
+        "Add a blazer or jacket to elevate the outfit and add a layer of professionalism",
+        "Ensure the white shoes are immaculately clean and polished to avoid any distractions"
+      ],
+      "risks": [
+        "The pink trousers may be perceived as too bold or attention-seeking for a traditional interview setting",
+        "The combination of blue and pink may clash and create a jarring visual effect"
+      ],
+      "groomingTips": [
+        "Make sure to iron the blue shirt to create a crisp and smooth finish",
+        "Pay attention to shoe polish to ensure the white shoes are spotless",
+        "Keep hair styled neatly and away from the face to maintain a professional appearance"
+      ]
+    },
+    "_id": "local_1776870423377kkhuz",
+    "date": "2026-04-22T15:07:03.377Z"
+  }
+]
