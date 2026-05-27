@@ -187,7 +187,7 @@ npm run dev
 
 <div align="center">
 
-**Jaanvi Chouhan**
+** Kanak Khandelwal **
 *B.Tech CSE · Medi-Caps University, Indore*
 
 [![GitHub](https://img.shields.io/badge/GitHub-Kanak172k5-181717?style=flat-square&logo=github)](https://github.com/Kanak172k5)
